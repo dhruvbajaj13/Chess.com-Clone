@@ -1,0 +1,49 @@
+1.TECH STACK:-
+    Node.js :-for server part
+    Express.js :- for routing,taking data from clients server and all
+    Socket.io :- for realtime connection
+    chess.js :- for logic of the game
+
+2. THE PLAN
+
+  Initialisation  ---> Initial Board Rendering --> Drag and Drop Functionality --->Socket Event Handling(both client and server)
+
+a) INITIALISATION
+    -->Socket and chess objects are initialised
+    -->Board element is selected from DOM
+    -->Initial values for draggedPiece(vo piece jise hm darg krre ho),sourceSquare(jaha se dragpiece drag hora h) and
+     playerRole(white se playing ya black se) are set to null.
+
+b) INITIAL BOARD RENDERING
+   --> renderBoard()  is called to display the initial state of the chessBoard
+
+c) DRAG AND DROP FUNCTIONALITY
+  --> renderBoard() sets up drag and drop event listeners for each peice and sqaure
+  --> pieces are draggable based on the players role
+  -->when a piece is dragged,draggedPiece and sourceSqaure are set.
+  -->When a piece is dropped, handleMove() is called to handle the move and logic and emit it to the server
+
+3. VARIABLES CLIENT SIDE
+
+    -->Socket :-Connection to the socket using socket.io
+    -->Chess :- An instance of the chess class
+    -->BoardElement :- DOM Element with the id "Chessboard"
+    -->DraggedPiece :- the piece being dragged during a drag and drop functionality
+    -->sourceSqaure :- stores the starting sqaure of the dragged piece
+    -->PlayerRole :- holds the role of the player(eg:- "W" for white,"B" for black or Null for spectator)
+  
+4.   FUNCTIONS CLIENT SIDE                          SOCKET CLIENT SIDE
+     ->RenderBoard()                                  ->Socket.On("PlayerRole")
+     ->HandleMove()                                   ->Socket.On("SpectatorRole")
+     ->GetPieceUnicode()                              ->Socket.On("BoardState")
+                                                      ->Socket.On("Move")
+
+5. FUNCTION/EVENT
+
+-->'renderBoard' :- renders the chessboard,sets up the pieces and squared,add events listeners for drag and drop functionality and updates board oreintation
+-->'handleMove' :- constructs a move object,emits a "move" event through the socket
+-->'getPieceUnicode' :- returns the unicode character for a given chess piece
+-->'socket.on("playerRole")' :- sets the player's role ,calls 'renderBoard' to update the board
+-->'socket.on("spectatotRole")' :- sets the 'playerRole' to null,calls 'renderBoard' to update the board
+-->'socket.on('boardState')'' :- loads a FEN string into the chess game,calls 'renderboard' to update the board
+-->'socket.on("move")' :- applies a move to the chess game, calls 'renderboard' to update the board
