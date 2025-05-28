@@ -112,7 +112,7 @@ socket.on("move",function(move){
         chess.move(move);
         renderBoard();
     } else {
-        console.error("Error processing move.");
+        console.error("Error processing during move.");
     }
 });
 
