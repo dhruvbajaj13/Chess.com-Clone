@@ -4,9 +4,7 @@
     Socket.io :- for realtime connection
     chess.js :- for logic of the game
 
-2. THE PLAN
 
-  Initialisation  ---> Initial Board Rendering --> Drag and Drop Functionality --->Socket Event Handling(both client and server)
 
 a) INITIALISATION
     -->Socket and chess objects are initialised
